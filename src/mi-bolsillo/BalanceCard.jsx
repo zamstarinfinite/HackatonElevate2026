@@ -178,7 +178,7 @@ function IncomeSheet({ open, income, onClose, onSave, onDelete }) {
               onChange={e => setNombre(e.target.value)}
               onFocus={() => setNombreFocus(true)}
               onBlur={() => setTimeout(() => setNombreFocus(false), 120)}
-              placeholder="Ej. Nómina Coppel"
+              placeholder="Ej. Nómina DoFinance"
               style={{
                 width: '100%', boxSizing: 'border-box',
                 height: 46, border: 'none', outline: 'none',

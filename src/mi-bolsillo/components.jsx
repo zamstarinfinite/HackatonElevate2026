@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CATS, QUICK_ORDER, FREQS, COLORS as C, EASE, fmt } from './data';
-import logoWhite from './assets/bancoppel-logo-white.png';
 
 const POPPINS = "'Poppins', sans-serif";
 
@@ -24,13 +23,11 @@ const CheckIcon = () => (
   </svg>
 );
 
-export function BrandDots({ big = 16, small = 8, gap = 3 }) {
+export function BrandName({ compact = false }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap, height: 40 }}>
-      <span style={{ width: big, height: big, borderRadius: '50%', background: C.yellow, flex: 'none' }} />
-      <span style={{ width: small, height: small, borderRadius: '50%', background: C.yellow, flex: 'none' }} />
-      <span style={{ width: small, height: small, borderRadius: '50%', background: C.yellow, flex: 'none' }} />
-    </div>
+    <span style={{ color: '#FFFFFF', fontFamily: POPPINS, fontSize: compact ? 15 : 23, fontWeight: 600, letterSpacing: compact ? -0.3 : -0.7, whiteSpace: 'nowrap' }}>
+      DoFinance
+    </span>
   );
 }
 
@@ -70,18 +67,18 @@ export function BrandHeader({ tab, collapsed, showNewDot, onTabChange }) {
   return (
     <header data-variant={col ? 'collapsed' : 'expanded'} style={{ flex: 'none', padding: `4px 20px ${col ? 24 : 32}px`, display: 'flex', flexDirection: 'column', transition: `padding ${t}` }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: col ? 0 : 36, marginBottom: col ? 0 : 16, opacity: col ? 0 : 1, overflow: 'hidden', transition: `height ${t}, margin ${t}, opacity .2s` }}>
-        <img src={logoWhite} alt="BanCoppel" style={{ height: 30, display: 'block' }} />
+        <BrandName />
         <HeaderBell style={{ opacity: onB ? 1 : 0, pointerEvents: onB ? 'auto' : 'none', transition: 'opacity .3s' }} />
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <div aria-label="BanCoppel" style={{ flex: 'none', width: col ? 52 : 0, opacity: col ? 1 : 0, overflow: 'hidden', transition: `width ${t}, opacity .25s` }}>
-          <BrandDots />
+        <div aria-label="DoFinance" style={{ flex: 'none', width: col ? 92 : 0, opacity: col ? 1 : 0, overflow: 'hidden', transition: `width ${t}, opacity .25s` }}>
+          <BrandName compact />
         </div>
         <div role="tablist" style={{ position: 'relative', flex: 1, minWidth: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', padding: 4, borderRadius: 999, background: 'rgba(255,255,255,0.12)' }}>
           <div style={{ position: 'absolute', top: 4, bottom: 4, left: 4, width: 'calc(50% - 4px)', borderRadius: 999, background: '#FFFFFF', boxShadow: '0 2px 8px rgba(0,0,0,0.18)', transform: onB ? 'translateX(100%)' : 'translateX(0)', transition: `transform ${t}` }} />
           <TabButton active={!onB} onClick={() => onTabChange('login')}>Bienvenido</TabButton>
           <TabButton active={onB} onClick={() => onTabChange('bolsillo')} style={{ rowGap: 7, columnGap: 0, width: '100%' }}>
-            Amigo BanCoppel
+            Amigo DoFinance
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: C.yellow, opacity: showNewDot && !onB ? 1 : 0, transition: 'opacity .3s' }} />
           </TabButton>
         </div>
@@ -114,7 +111,7 @@ export function LoginForm({ onSubmit, onForgot, onCreateAccount, onProducts }) {
     <form onSubmit={e => { e.preventDefault(); submit(); }} style={{ width: '50%', padding: '26px 24px', display: 'flex', flexDirection: 'column', gap: 14, background: '#FFFFFF' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <span style={{ fontFamily: POPPINS, fontSize: 28, fontWeight: 800, color: 'rgb(5,41,122)' }}>Ingresa a tu cuenta</span>
-        <span style={{ fontSize: 16, color: 'rgb(8,23,84)', marginBottom: 24 }}>Usa tus datos de cliente BanCoppel</span>
+        <span style={{ fontSize: 16, color: 'rgb(8,23,84)', marginBottom: 24 }}>Usa tus datos de cliente DoFinance</span>
       </div>
       <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         <span style={{ ...label, fontSize: 14 }}>Número de cliente o CLABE</span>
@@ -499,13 +496,8 @@ function SuggestionPanel({ open, text, ctaLabel, onCta, onClose, onOptOut }) {
   return (
     <div aria-hidden={!open} style={{ maxHeight: open ? 220 : 0, opacity: open ? 1 : 0, marginTop: open ? -12 : 0, overflow: 'hidden', transition: `max-height .45s ${EASE}, opacity .3s, margin .3s` }}>
       <div role="note" style={{ background: '#F3F5FE', border: '1px solid #DCE3FD', borderTop: 'none', borderRadius: '0 0 12px 12px', padding: '22px 12px 12px 14px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-        <span style={{ width: 30, height: 30, flex: 'none', borderRadius: 9, background: C.navyDark, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
-          <span style={{ width: 9, height: 9, borderRadius: '50%', background: C.yellow }} />
-          <span style={{ width: 4.5, height: 4.5, borderRadius: '50%', background: C.yellow }} />
-          <span style={{ width: 4.5, height: 4.5, borderRadius: '50%', background: C.yellow }} />
-        </span>
         <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 0.6, color: C.navyDark }}>SUGERENCIA BANCOPPEL</span>
+          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: 0.6, color: C.navyDark }}>SUGERENCIA DOFINANCE</span>
           <span style={{ fontSize: 12, lineHeight: 1.45, color: C.text }}>{text}</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginTop: 4 }}>
             <button onClick={onCta} tabIndex={open ? 0 : -1} style={{ border: 'none', background: 'transparent', padding: '4px 0', fontSize: 12, fontWeight: 700, color: C.primary, cursor: 'pointer' }}>{ctaLabel}</button>
@@ -1087,7 +1079,7 @@ export function IntroSheet({ open, onClose }) {
     <Sheet open={open} onClose={onClose} tag="¡Nuevo!" tagSolid title="Mi Bolsillo"
       badge={<span style={{ fontSize: 10, fontWeight: 600, color: '#08A046', background: 'rgba(8,191,80,0.1)', border: '1px solid rgba(8,191,80,0.35)', padding: '2px 8px', borderRadius: 999 }}>Sin registro</span>}
       body="Organiza tus gastos y pagos sin necesitar una cuenta. Gratis, sin letra chica."
-      footnote="Al convertirte en cliente BanCoppel, tus datos se sincronizan y recibes ofertas personalizadas según tus gastos reales.">
+      footnote="Al convertirte en cliente DoFinance, tus datos se sincronizan y recibes ofertas personalizadas según tus gastos reales.">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <Benefit icon="📊" title="Ve en qué se va tu dinero" sub="Gráfica por categoría al instante" />
         <Benefit icon="🔔" title="Recordatorios de pago" sub="Te avisamos antes de cada vencimiento" />
@@ -1106,8 +1098,8 @@ export function ApartadoSheet({ open, item, onClose, onOpenAccount }) {
   const hint = f.n > 1 ? `En ${f.n} ${f.unit} juntas ${fmt(amount)} para tu próximo pago` : `Un solo apartado de ${fmt(amount)} antes del vencimiento`;
 
   return (
-    <Sheet open={open} onClose={onClose} tag="Producto BanCoppel" title="Aparta para tu próximo pago"
-      body="Con los apartados de tu Cuenta Digital BanCoppel separas dinero para cada pago sin mezclarlo con tu saldo disponible."
+    <Sheet open={open} onClose={onClose} tag="Producto DoFinance" title="Aparta para tu próximo pago"
+      body="Con los apartados de tu Cuenta Digital DoFinance separas dinero para cada pago sin mezclarlo con tu saldo disponible."
       footnote="Tus gastos siguen guardados solo en este teléfono. Esta sugerencia se calcula aquí, sin enviar tus datos.">
       <div style={{ background: '#F3F5FE', borderRadius: 16, padding: 16, display: 'flex', flexDirection: 'column', gap: 14 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
@@ -1150,8 +1142,8 @@ export function DomiciliacionSheet({ open, services, selected, onToggle, onClose
   const picked = services.filter(s => selected[s.id]);
   const total = picked.reduce((a, s) => a + s.amount, 0);
   return (
-    <Sheet open={open} onClose={onClose} tag="Producto BanCoppel" title="Tus servicios, en automático"
-      body="Domicilia tus pagos recurrentes a una Tarjeta de Crédito BanCoppel y deja de estar al pendiente de cada fecha."
+    <Sheet open={open} onClose={onClose} tag="Producto DoFinance" title="Tus servicios, en automático"
+      body="Domicilia tus pagos recurrentes a una Tarjeta de Crédito DoFinance y deja de estar al pendiente de cada fecha."
       footnote="Sujeto a aprobación de crédito. Tus gastos siguen guardados solo en este teléfono.">
       <div style={{ background: '#F3F5FE', borderRadius: 16, padding: '6px 16px 14px', display: 'flex', flexDirection: 'column' }}>
         {services.map(s => {

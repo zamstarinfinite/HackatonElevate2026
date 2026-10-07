@@ -139,8 +139,8 @@ export default function MiBolsillo({
     // Sugerencia TDC para suscripciones no pagadas
     if (item.cat === 'suscripciones' && item.status !== 'paid' && !optOut && !dismissedTDC.includes(item.id)) {
       return {
-        text: `Domicilia ${item.name} a una Tarjeta de Crédito BanCoppel y se cobra sola cada mes. Sin recordatorios, sin cargos por olvido — tú solo disfruta.`,
-        ctaLabel: 'Solicitar mi TDC BanCoppel ›',
+        text: `Domicilia ${item.name} a una Tarjeta de Crédito DoFinance y se cobra sola cada mes. Sin recordatorios, sin cargos por olvido — tú solo disfruta.`,
+        ctaLabel: 'Solicitar mi TDC DoFinance ›',
         onCta: () => (onApplyCard ? onApplyCard({ item }) : toLoginAfterSheet()),
         onClose: () => setDismissedTDC(d => [...d, item.id]),
         onOptOut: declineSuggestions,
@@ -150,8 +150,8 @@ export default function MiBolsillo({
     const isDom = suggestion.type === 'domiciliar';
     return {
       text: isDom
-        ? `¿Prefieres no depender del recordatorio? Domicilia ${item.name} a una Tarjeta de Crédito BanCoppel y se paga sola cada mes.`
-        : `¿Y si el próximo pago de ${item.name} ya estuviera apartado? Separa ${fmt(item.amount)} poco a poco con tu Cuenta Digital BanCoppel.`,
+        ? `¿Prefieres no depender del recordatorio? Domicilia ${item.name} a una Tarjeta de Crédito DoFinance y se paga sola cada mes.`
+        : `¿Y si el próximo pago de ${item.name} ya estuviera apartado? Separa ${fmt(item.amount)} poco a poco con tu Cuenta Digital DoFinance.`,
       ctaLabel: isDom ? 'Domiciliar mis servicios ›' : 'Crear un apartado ›',
       onCta: () => (isDom ? openDomiciliacion() : (setApartadoFor(item), setSheet('apartado'))),
       onClose: () => setSuggestion(null),
@@ -210,7 +210,7 @@ export default function MiBolsillo({
               onToggle={togglePaid} onBell={toggleBell} onDelete={deleteItem} highlight={tutorialStep === 3} /></div>
             <div style={{ textAlign: 'center', fontSize: 11, color: C.text2, lineHeight: 1.5, padding: '4px 20px 0' }}>
               <button onClick={() => goTab('login')} style={{ border: 'none', background: 'transparent', padding: 0, color: C.primary, textDecoration: 'underline', fontWeight: 600, fontSize: 11, cursor: 'pointer' }}>Inicia sesión</button>
-              {' '}para sincronizar con tu cuenta BanCoppel
+              {' '}para sincronizar con tu cuenta DoFinance
             </div>
           </div>
         </div>

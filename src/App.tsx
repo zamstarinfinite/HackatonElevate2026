@@ -1,21 +1,17 @@
 // @ts-ignore
 import MiBolsillo from './mi-bolsillo/MiBolsillo';
-import { useEffect, useRef, useState } from 'react';
-import splashVideo from './mi-bolsillo/assets/splash.mp4';
+import { useEffect, useState } from 'react';
 
 function SplashScreen({ onDone }: { onDone: () => void }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [fading, setFading] = useState(false);
 
-  const finish = () => {
-    setFading(true);
-    setTimeout(onDone, 520);
-  };
-
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.play().catch(() => finish()); // if autoplay blocked, skip
+    const fadeTimer = window.setTimeout(() => setFading(true), 2400);
+    const doneTimer = window.setTimeout(onDone, 2920);
+    return () => {
+      window.clearTimeout(fadeTimer);
+      window.clearTimeout(doneTimer);
+    };
   }, []);
 
   return (
@@ -33,18 +29,18 @@ function SplashScreen({ onDone }: { onDone: () => void }) {
         pointerEvents: fading ? 'none' : 'auto',
       }}
     >
-      <video
-        ref={videoRef}
-        src={splashVideo}
-        muted
-        playsInline
-        onEnded={finish}
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-        }}
-      />
+      <div className="dof-splash-content">
+        <div className="dof-stack" aria-hidden="true">
+          {[0, 1, 2, 3].map(index => (
+            <span
+              key={index}
+              className="dof-stack-block"
+              style={{ '--stack-index': index } as React.CSSProperties}
+            />
+          ))}
+        </div>
+        <span className="dof-splash-name">DoFinance</span>
+      </div>
     </div>
   );
 }
